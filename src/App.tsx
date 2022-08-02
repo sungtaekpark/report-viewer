@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SecretReportContainer from "./Report/SecretReportContainer/SecretReportContainer";
+import {RecoilRoot} from "recoil";
+import './i18n/config';
+import './Asset/fonts/index.css';
+
+import ThemeContainer from "./Theme/ThemeContainer";
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RecoilRoot >
+          <ThemeContainer >
+            <SecretReportContainer />
+          </ThemeContainer>
+      </RecoilRoot>
     </div>
   );
 }

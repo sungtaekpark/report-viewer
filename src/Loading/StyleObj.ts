@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { COLOR, TRANSITION } from '../../constants';
 
 const LoadingBase = styled.div`
   display: flex;
@@ -9,7 +8,6 @@ const LoadingBase = styled.div`
   justify-self: center;
   gap: 10px;
   position: relative;
-  width: max-width;
   height: max-content;
   align-items: center;
   justify-content: center;
@@ -26,19 +24,19 @@ const LoadingRail = styled.div`
 
 const loadingAnimation = keyframes`
   0% {
-      transform-origin: center left;
+      //transform-origin: center left;
       transform: scaleX(0%);
     }
     49% {
-      transform-origin: center left;
+      //transform-origin: center left;
       transform: scaleX(100%);
     }
     50% {
-      transform-origin: center right;
+      //transform-origin: center right;
       transform: scaleX(100%);
     }
     100% {
-      transform-origin: center right;
+      //transform-origin: center right;
       transform: scaleX(0%);
     }
 `;
@@ -47,8 +45,6 @@ const LoadingGauge = styled.div`
   width: 100%;
   height: 4px;
   border-radius: 2px;
-  background: ${COLOR.COMPONENT_THEME.LOADING_GAUGE_THEME.gauge.background};
-  animation: ${loadingAnimation} 2s ${TRANSITION.CURVE} infinite;
 `;
 
 export { LoadingBase, LoadingRail, LoadingGauge };

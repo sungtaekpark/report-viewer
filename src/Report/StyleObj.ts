@@ -30,6 +30,8 @@ const ReportViewerCompositionSection = styled.div`
   }
   .sub-header {
     vertical-align: middle;
+    background-color: #ebebeb;
+
   }
   .data-header {
     background-color: rgb(235, 235, 235);

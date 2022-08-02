@@ -1,12 +1,12 @@
 import React from 'react';
 import { ReportViewerHeaderSectionWrap } from './StyleObj';
-import substationBi from '../../../../asset/images/substation_logo_small.svg';
+import substationBi from '../../Asset/Image/substation_logo_small.svg'
 import { useTranslation } from 'react-i18next';
 
 function ReportViewerHeaderSection(props: any) {
   const { headerData } = props;
   const { assetName, analysisDate } = headerData;
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const headerText = t(`report:reportHeader`);
 

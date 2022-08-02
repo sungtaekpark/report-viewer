@@ -1,31 +1,77 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, useLayoutEffect,useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   ReportViewerCompositionSection,
   ReportViewerBody,
-} from '../ReportViewerComposition/StyleObj';
-import StateDiagnosisSection from '../ReportViewerComposition/StateDiagnosisSection/StateDiagnosisSection';
-import StateFutureSection from '../ReportViewerComposition/StateFutureSection/StateFutureSection';
-import { useRecoilValue } from 'recoil';
-import { ReportDescState } from '../ReportViewerComposition/ReportViewerComposition';
+} from '../StyleObj';
+import StateDiagnosisSection from '../StateDiagnosisSection/StateDiagnosisSection';
+import StateFutureSection from '../StateFutureSection/StateFutureSection';
+import {selectorFamily, useRecoilValue} from 'recoil';
 import { ErrorFallback } from '../../ErrorFallback/BaseErrorFallback';
-import { Loading } from '../../../components/Loading/LoadingBar';
+import { Loading } from '../../Loading/LoadingBar';
 import { ErrorBoundary } from 'react-error-boundary';
+import axios from "axios";
+
+
+const getRowData = async (
+    api_type: string,
+    company_id: string,
+    site_id: string,
+    mtr_id: string,
+    diagnosis_date: string,
+    token: string
+) => {
+    const translatedApiType = api_type === 'dev'
+        ? 'https://subs-backend.guardione.dev'
+        : api_type === "ai" ? 'https://subs-backend.guardione.ai'
+            : api_type === "demo" ? 'https://subs-backend-gs.guardione.dev'
+                : 'https://subs-backend.guardione.dev'
+   return await axios.get(`${translatedApiType}/api/companies/${company_id}/sites/${site_id}/assets/mtr/${mtr_id}/report?diagnosis_date=${diagnosis_date}`, {
+        headers: {Authorization: `${token ? `Bearer ${token}` : undefined}`},
+    })
+}
+
+export const ReportDescState = selectorFamily({
+    key: '@ReportState/description',
+    get:
+        (query: any) =>
+            async ({ get }) => {
+                const { api_type, company_id, site_id, mtr_id, diagnosis_date, token } = query;
+                const {
+                    data: { data: result },
+                } = await getRowData(
+                    api_type,
+                    company_id,
+                    site_id,
+                    mtr_id,
+                    diagnosis_date,
+                    token
+                );
+                return result;
+            },
+});
 
 function SecretReport(props: any) {
-  const { company_id, site_id, mtr_id, diagnosis_date }: any = useParams();
-  const rowData = useRecoilValue(
-    ReportDescState({
-      siteId: site_id,
-      assetType: 'mtr',
-      assetId: mtr_id,
-      diagnosisDate: diagnosis_date,
-    })
-  );
+  const { api_type, company_id, site_id, mtr_id, diagnosis_date, token }: any = useParams();
 
-  const [reportData, setReportData] = useState(rowData);
+    const rowData = useRecoilValue(
+        ReportDescState({
+            api_type,
+            company_id,
+            site_id,
+            mtr_id,
+            diagnosis_date,
+            token
+        })
+    );
+    const [reportData, setReportData] = useState(rowData);
 
-  return (
+    useLayoutEffect(() => {
+        setReportData(rowData);
+    }, [rowData]);
+
+
+    return (
     <div
       style={{
         display: 'flex',

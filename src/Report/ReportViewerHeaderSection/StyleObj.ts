@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import DESIGN_TOKEN from '../../../../constants/token';
+// import DESIGN_TOKEN from '../../../../constants/token';
 
 const ReportViewerHeaderSectionWrap = styled.div`
   display: flex;
   height: 100px;
   //height: 100%;
   padding: 30px 20px;
-  background-color: ${DESIGN_TOKEN.luminance.luminance8};
+  background: rgb(243, 243, 243);
   .header-text-area {
     flex: 4;
     font-size: 32px;

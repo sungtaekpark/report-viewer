@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import SecretReport from './SecretReport';
 import { ErrorFallback } from '../../ErrorFallback/BaseErrorFallback';
-import { Loading } from '../../../components/Loading/LoadingBar';
+import { Loading } from '../../Loading/LoadingBar';
 import { ErrorBoundary } from 'react-error-boundary';
 
 function SecretReportContainer(props: any) {

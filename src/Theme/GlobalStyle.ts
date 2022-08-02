@@ -18,12 +18,4 @@ export default createGlobalStyle`
     width: 100vw;
     height: 100vh; 
   }
-  .ReactModal__Overlay--after-open{
-    z-index: 3;
-    /* border:none!important; */
-  }
-  .ReactModal__Content--after-open{
-    border:none!important;
-    border-radius:0px!important;
-  }
 `;

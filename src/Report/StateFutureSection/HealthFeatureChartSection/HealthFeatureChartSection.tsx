@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { HealthFeatureSectionWrap } from './StyleObj';
-import latentSpaceValue from '../../../../../asset/json/LatentSpaceValue.json';
 import ReactEcharts from 'echarts-for-react';
 import { useTranslation } from 'react-i18next';
 import ReportCommonLabel from '../../ReportCommonLabelSection/ReportCommonLabel';
+import latentSpaceValue from '../../../Asset/json/LatentSpaceValue.json';
 
 function HealthFeatureChartSection(props: any) {
   const chartRef = useRef<any>(null);
